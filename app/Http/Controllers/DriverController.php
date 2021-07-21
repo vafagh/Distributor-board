@@ -177,6 +177,6 @@ class DriverController extends Controller
                                 ->orderBy('created_at','desc')
                                 ->get();
 
-        return view('driver.direction',compact('driver', 'locations','dt','ongoingRides'));
+        return view('driver.direction',compact('driver', 'locations','dt','ongoingRides','shift'));
     }
 }

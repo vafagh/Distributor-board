@@ -33,7 +33,7 @@ class RideableController extends Controller
         ->whereIn('status', $request->filled('status') ? ['returned'] : Helper::filter('ongoing'))
         ->where([$fields['shift'], $fields['delivery_date']])
         ->orderBy($rideableSort, 'asc')
-        ->paginate(120);
+        ->paginate(200);
         ($request!==null) ? $flashId = $request->id : $flashId = '1';
         return view('rideable.rideables',compact('rideables','op1','op2','flashId'));
     }
@@ -206,7 +206,7 @@ class RideableController extends Controller
                                             'qty' => $negative[2],
                                             'user' => User::where('name', '=', $negative[4])->get()->first()->id,
                                             'description' => $negative[3],
-                                            'locationName0' => 'Other',
+                                            'locationName0' => 'Unknown Status',
                                             'type' => 'pickup',
                                             'showForm' => 'yes',
                                             'stored' => 'no',

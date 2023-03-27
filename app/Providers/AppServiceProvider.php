@@ -20,8 +20,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer(['home','backorder','layouts.menu','map','layouts.components.create.service','layouts.components.create.fillup','layouts.components.edit.service'], function ($view)
         {
-            $activeDrivers = \App\Driver::with('rides','rides.truck','rides.rideable')
-                    ->where('truck_id','!=',null)
+            $activeDrivers = \App\Driver::where('truck_id','!=',null) //with('rides','rides.truck','rides.rideable')
                     ->get();
             $today = new Carbon();
             $tomorrow = new Carbon('tomorrow');

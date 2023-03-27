@@ -16,8 +16,7 @@ class DriverController extends Controller
 
     public function index()
     {
-        $drivers = Driver::with('rides','fillups','rides.truck','rides.rideable.location')
-                ->orderByDesc('working')
+        $drivers = Driver::orderByDesc('working')//with('rides','fillups','rides.truck','rides.rideable.location')
                 ->orderBy('truck_id')
                 ->get();
 
@@ -47,7 +46,7 @@ class DriverController extends Controller
 
     public function show($driver_id, Request $request)
     {
-        $driver = Driver::with('rides','fillups','rides.truck','rides.rideable','rides.rideable.location','services')->find($driver_id);
+        $driver = Driver::find($driver_id);//with('rides','fillups','rides.truck','rides.rideable','rides.rideable.location','services')
         (empty($request->input('sortby'))) ? $rideSort = 'created_at': $rideSort = $request->input('sortby');
         $ongoingRides = $driver->rides()
             ->whereHas('rideable', function($q) {
